@@ -50,9 +50,7 @@
                 <template v-slot:default="{ item }">
                   <v-list-item :key="item.id">
                     <v-list-item-avatar>
-                      <v-img
-                        :src="getCastAvatar(item)"
-                      ></v-img>
+                      <v-img :src="getCastAvatar(item)"></v-img>
                     </v-list-item-avatar>
                     <v-list-item-title>
                       {{ item.name }}
@@ -68,15 +66,24 @@
           <v-col cols="12" sm="4">
             <RightMovieInfo :data="data" />
           </v-col>
-          <!-- RECOMMENDATION -->
-          <h4 class="pink--text font-weight-bold title mt-4">Movies Recommendation</h4>
-          <v-row class="mt-2 mb-4">
-            <v-col cols="12" sm="3" v-for="recommend in recommendations" :key="recommend.id">
-                <v-card :to="`/movie/${recommend.id}`" nuxt>
-                    <v-img :src="`https://image.tmdb.org/t/p/w300${recommend.poster_path}`"></v-img>
-                </v-card>
-            </v-col>
-          </v-row>
+        </v-row>
+        <!-- RECOMMENDATION -->
+        <h4 class="pink--text font-weight-bold title mt-4">
+          Movies Recommendation
+        </h4>
+        <v-row class="mt-2 mb-4">
+          <v-col
+            cols="12"
+            sm="3"
+            v-for="recommend in recommendations"
+            :key="recommend.id"
+          >
+            <v-card :to="`/movie/${recommend.id}`" nuxt>
+              <v-img
+                :src="`https://image.tmdb.org/t/p/w300${recommend.poster_path}`"
+              ></v-img>
+            </v-card>
+          </v-col>
         </v-row>
       </v-col>
     </v-row>
@@ -101,12 +108,12 @@ export default {
   },
   methods: {
     getCastAvatar(item) {
-        if(item.profile_path) {
-            return "https://image.tmdb.org/t/p/w45" + item.profile_path
-        } 
-        return "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
-    }
-  }
+      if (item.profile_path) {
+        return "https://image.tmdb.org/t/p/w45" + item.profile_path;
+      }
+      return "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg";
+    },
+  },
 };
 </script>
 
