@@ -1,5 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
-
+const token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiYzYzNmQ5OWViNjVhMzE0NDEzNWJjYmM3M2I3MjM1NSIsInN1YiI6IjYyZGUzOTgxMWEzMjQ4MDA0ZTBjYjU5MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SMlKZ1tCo5gv9zYUBtWzRS_g-YKhCkm7ENKpbDQnRoE"
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -25,6 +25,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    "~/plugins/loadFirstData.js"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,7 +46,12 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: "https://api.themoviedb.org/3/",
+    headers: {
+      common: {
+        Authorization: `Bearer ${token}`
+      }
+    }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <Navbar />
+    <Slider class="hidden-sm-and-down"/>
     <v-main>
       <Nuxt />
     </v-main>
