@@ -85,6 +85,56 @@
             </v-card>
           </v-col>
         </v-row>
+        <!-- REVIEWS -->
+        <h4 class="pink--text font-weight-bold title mt-4">User Reviews</h4>
+        <v-row
+          class="mt-2 mb-4"
+          v-for="review in reviews.results"
+          :key="review.id"
+        >
+            <v-card class="mx-auto">
+              <v-card-title class="d-md-flex align-center justify-space-between">
+                <div>
+                <v-list-item class="grow"
+                  ><v-list-item-avatar color="grey darken-3">
+                    <v-img
+                      class="elevation-6"
+                      alt=""
+                      :src="`https://image.tmdb.org/t/p/w500${review.author_details.avatar_path}`"
+                    ></v-img>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title
+                      class="black--text text-h6 font-weight-bold"
+                      >{{ review.author }}</v-list-item-title
+                    >
+                  </v-list-item-content>
+                </v-list-item>
+                </div>
+                <div >
+                  <v-icon color="yellow">mdi-star</v-icon>
+                  <span>{{review.author_details.rating}}/10</span>
+                </div>
+              </v-card-title>
+
+              <v-card-text class="black--text">
+                "{{ review.content }}"
+              </v-card-text>
+
+              <v-card-actions>
+                <v-list-item class="grow">
+                  <v-row align="center" justify="start">
+                    <v-icon class="mr-1"> mdi-heart </v-icon>
+                    <span class="subheading mr-2">256</span>
+                    <span class="mr-1">·</span>
+                    <v-icon class="mr-1"> mdi-share-variant </v-icon>
+                    <span class="subheading">45</span>
+                  </v-row>
+                </v-list-item>
+              </v-card-actions>
+            </v-card>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
@@ -98,9 +148,11 @@ export default {
         `/movie/${params.id}?append_to_response=credits,videos,images`
       );
       const res2 = await $axios.$get(`/movie/${params.id}/recommendations`);
+      const res3 = await $axios.$get(`/movie/${params.id}/reviews`);
       return {
         data: res,
         recommendations: res2.results.slice(0, 4),
+        reviews: res3,
       };
     } catch (e) {
       console.log(e);
